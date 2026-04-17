@@ -1,4 +1,4 @@
-# Touying University Theme（中文学术汇报模板）
+# Touying University Theme For UCAS
 
 基于 [Touying](https://github.com/touying-typ/touying) 的 Typst 幻灯片主题，面向中文学术汇报场景。本文档已按当前仓库源码重新梳理，并与以下文件逐项对齐：
 
@@ -14,7 +14,13 @@
 - 保持强可定制性（颜色、字体、布局、页眉页脚策略）
 - 提供“上下文感知”目录能力（当前章节高亮、父子级联）
 
-默认支持 16:9 与 4:3 两种页面比例。
+该模板自本科毕业论文答辩（2025.02-2025.06）开始打磨，目前可满足绝大多数需求
+
+代码大量参考自以下项目：
+
+- [tt-lectures](https://github.com/zeroeightysix/tt-lectures)
+- [touying-buaa](https://github.com/Coekjan/touying-buaa)
+- [typst-talk](https://github.com/OrangeX4/typst-talk)
 
 ## 2. 仓库结构
 
@@ -77,21 +83,21 @@ typst compile main.typ
 
 ### 4.1 参数总览（按当前实现）
 
-| 参数 | 默认值 | 实际作用 |
-| --- | --- | --- |
-| `aspect-ratio` | `"16-9"` | 仅允许 `"16-9"` / `"4-3"`，不合法会 `assert` |
-| `progress-bar` | `true` | 控制内容页页眉进度条显示 |
-| `header` | 当前二级标题 | 页眉左侧内容函数 |
-| `header-right` | 一级标题 + `logo1` | 页眉右侧内容函数 |
-| `footer-columns` | `(25%, 1fr, 25%)` | 页脚三列宽度 |
-| `footer-a` | `self.info.author` | 页脚左侧 |
-| `footer-b` | `short-title` 或 `title` | 页脚中间 |
-| `footer-c` | 日期 + 页码 | 页脚右侧 |
-| `colors` | `default-colors` | 注入 Touying 的 `primary/secondary/tertiary/neutral-*` |
-| `fonts` | `default-fonts` | 字体配置对象（当前实现中未直接用于 `set text`，但可供样式复用） |
-| `text-styles` | `default-text-styles` | 文本样式集合，控制正文/标题/图注/目录等 |
-| `layout-config` | `default-layout-config` | 边距、标题编号、目录间距、Logo 高度等 |
-| `color-palette` | `default-color-palette` | **当前实现中仅声明参数，未参与后续计算** |
+| 参数               | 默认值                       | 实际作用                                                          |
+| ------------------ | ---------------------------- | ----------------------------------------------------------------- |
+| `aspect-ratio`   | `"16-9"`                   | 仅允许 `"16-9"` / `"4-3"`，不合法会 `assert`                |
+| `progress-bar`   | `true`                     | 控制内容页页眉进度条显示                                          |
+| `header`         | 当前二级标题                 | 页眉左侧内容函数                                                  |
+| `header-right`   | 一级标题 +`logo1`          | 页眉右侧内容函数                                                  |
+| `footer-columns` | `(25%, 1fr, 25%)`          | 页脚三列宽度                                                      |
+| `footer-a`       | `self.info.author`         | 页脚左侧                                                          |
+| `footer-b`       | `short-title` 或 `title` | 页脚中间                                                          |
+| `footer-c`       | 日期 + 页码                  | 页脚右侧                                                          |
+| `colors`         | `default-colors`           | 注入 Touying 的 `primary/secondary/tertiary/neutral-*`          |
+| `fonts`          | `default-fonts`            | 字体配置对象（当前实现中未直接用于 `set text`，但可供样式复用） |
+| `text-styles`    | `default-text-styles`      | 文本样式集合，控制正文/标题/图注/目录等                           |
+| `layout-config`  | `default-layout-config`    | 边距、标题编号、目录间距、Logo 高度等                             |
+| `color-palette`  | `default-color-palette`    | **当前实现中仅声明参数，未参与后续计算**                    |
 
 ### 4.2 渲染流程
 
@@ -106,17 +112,17 @@ typst compile main.typ
 
 `config-info(...)` 是 Touying 提供的信息存储入口，本主题会读取以下字段：
 
-| 字段 | 使用位置 | 说明 |
-| --- | --- | --- |
-| `title` | 标题页、页脚中列回退值 | 主标题 |
-| `subtitle` | 标题页 | 副标题 |
-| `author` | 页脚左列、标题页（当无 `authors` 时） | 建议始终设置 |
-| `authors` | 标题页 | 若存在则优先于 `author` |
-| `institution` | 标题页 | 机构信息 |
-| `date` | 标题页、页脚右列 | 支持文本或日期 |
-| `logo` | 标题页 | 封面 Logo |
-| `logo1` | 页眉右侧 | 页眉 Logo |
-| `short-title` | 页脚中列 | 不设时回退 `title` |
+| 字段            | 使用位置                                | 说明                      |
+| --------------- | --------------------------------------- | ------------------------- |
+| `title`       | 标题页、页脚中列回退值                  | 主标题                    |
+| `subtitle`    | 标题页                                  | 副标题                    |
+| `author`      | 页脚左列、标题页（当无 `authors` 时） | 建议始终设置              |
+| `authors`     | 标题页                                  | 若存在则优先于 `author` |
+| `institution` | 标题页                                  | 机构信息                  |
+| `date`        | 标题页、页脚右列                        | 支持文本或日期            |
+| `logo`        | 标题页                                  | 封面 Logo                 |
+| `logo1`       | 页眉右侧                                | 页眉 Logo                 |
+| `short-title` | 页脚中列                                | 不设时回退 `title`      |
 
 注意：`footer-a` 默认只读 `author`，不会自动读 `authors`。
 
@@ -199,7 +205,12 @@ typst compile main.typ
 - `theme-sky-blue`
 - `theme-professional-red`
 
-使用方式：
+实际上，assets/vi 下有三套图标，分别对应：
+
+- IVPP-中国科学院古脊椎动物与古人类研究所
+- PKU-北京大学
+- UCAS-中国科学院大学
+  使用方式：
 
 ```typst
 #import "color-themes.typ": theme-elegant-green
@@ -322,3 +333,9 @@ typst compile main.typ
 1. `theme.typ`（主题入口与页面函数）
 2. `custom-outline.typ`（上下文目录机制）
 3. `color-themes.typ`（主题色组织方式）
+
+## 开发计划
+
+- 依照实际使用体验改进，尚无明确开发计划
+- 如有新的需求，请提出issue
+- 本项目应当会长期维护
