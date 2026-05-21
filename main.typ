@@ -15,9 +15,9 @@
 #let presentation-info = (
   title: [农民的力量],
   subtitle: [],
-  author: [作者A 作者B],
+  author: [Author1 et al.],
   authors: [
-    #text(weight: "bold")[作者A 作者B]
+    #text(weight: "bold")[Author1，Author2]
   ],
   date: [2026.1.1],
   institution: [中国科学院大学考古学与人类学系 \ 中国科学院古脊椎动物与古人类研究所],

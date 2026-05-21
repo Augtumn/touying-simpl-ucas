@@ -6,6 +6,16 @@
 - `color-themes.typ`
 - `custom-outline.typ`
 
+## 预览
+
+![alt text](image\README\main_1.png)
+
+![alt text](image\README\main_2.png)
+
+![alt text](image\README\main_3.png)
+
+![alt text](image\README\main_4.png)
+
 ## 项目定位
 
 这个模板的目标是：
